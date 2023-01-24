@@ -27,7 +27,10 @@ end
 
 function plotfractal()
     f = Figure(resolution = (800,800))
-    
+    set_window_config!(title = "Fractal Explorer")
+
+    h = 500
+    w = 500
     bitmap = zeros(h,w)
     
     sg = SliderGrid(f[2,1],
@@ -47,7 +50,7 @@ function plotfractal()
         zoom
     end
     
-    image_fractal = @lift(generate(bitmap, 500, 500, $c, $detail, $zoom, 0, 0))
+    image_fractal = @lift(generate(bitmap, w, h, $c, $detail, $zoom, 0, 0))
     
     ax = GLMakie.Axis(f[1,1], aspect=DataAspect(), xzoomlock = true, yzoomlock = true, xpanlock = true, ypanlock = true, xrectzoom = false, yrectzoom = false)
     hidedecorations!(ax)
